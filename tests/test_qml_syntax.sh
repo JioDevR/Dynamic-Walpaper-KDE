@@ -2,13 +2,15 @@
 set -e
 
 MAIN_QML="contents/ui/main.qml"
+CONFIG_QML="contents/ui/config.qml"
 
-if [ ! -f "$MAIN_QML" ]; then
-    echo "FAIL: $MAIN_QML does not exist"
-    exit 1
-fi
+for FILE in "$MAIN_QML" "$CONFIG_QML"; do
+    if [ ! -f "$FILE" ]; then
+        echo "FAIL: $FILE does not exist"
+        exit 1
+    fi
+    echo "Verifying $FILE syntax..."
+    qmllint "$FILE"
+done
 
-echo "Verifying $MAIN_QML syntax..."
-qmllint "$MAIN_QML"
-
-echo "PASS: $MAIN_QML verified successfully"
+echo "PASS: All QML files verified successfully"
