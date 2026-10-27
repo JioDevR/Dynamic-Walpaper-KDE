@@ -1,13 +1,13 @@
 import QtQuick
 import QtQuick.Layouts
+import org.kde.plasma.plasmoid
 import "../js/solar.js" as SolarEngine
 
-Item {
+WallpaperItem {
     id: root
-    anchors.fill: parent
 
-    // Plasma provides 'wallpaper.configuration'. Provide mock fallback for testing/preview.
-    readonly property var config: (typeof wallpaper !== "undefined" && wallpaper.configuration) ? wallpaper.configuration : fallbackConfig
+    // Plasma 6 provides 'root.configuration' through WallpaperItem
+    readonly property var config: (root.configuration) ? root.configuration : fallbackConfig
 
     QtObject {
         id: fallbackConfig

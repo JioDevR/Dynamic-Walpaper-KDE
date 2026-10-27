@@ -11,6 +11,11 @@ ColumnLayout {
     spacing: Kirigami.Units.largeSpacing
     Layout.fillWidth: true
 
+    // Required by Plasma 6 wallpaper configuration host (ConfigurationContainmentAppearance.qml)
+    property var configDialog: null
+    property var wallpaperConfiguration: null
+    property var parentLayout: null
+
     // KConfigXT configuration bindings
     property string cfg_folderPath: ""
     property string cfg_imageDawn: ""
