@@ -1,0 +1,18 @@
+{
+    "KPackageStructure": "Plasma/Wallpaper",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "joeldev.09@outlook.com",
+                "Name": "JioDevR"
+            }
+        ],
+        "Category": "Wallpaper",
+        "Description": "Dynamic wallpaper transitioning across solar phases",
+        "Icon": "preferences-desktop-wallpaper",
+        "Id": "org.kde.plasma.dynamicwallpaper",
+        "License": "GPL-3.0+",
+        "Name": "Dynamic Wallpaper",
+        "Version": "1.0.0"
+    }
+}

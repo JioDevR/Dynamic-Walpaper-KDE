@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+                          http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+  <kcfgfile name=""/>
+  <group name="General">
+    <entry name="folderPath" type="String">
+      <label>Folder containing dynamic wallpaper images</label>
+      <default></default>
+    </entry>
+    <entry name="imageDawn" type="String">
+      <label>Image assigned to dawn phase</label>
+      <default></default>
+    </entry>
+    <entry name="imageDay" type="String">
+      <label>Image assigned to day phase</label>
+      <default></default>
+    </entry>
+    <entry name="imageSunset" type="String">
+      <label>Image assigned to sunset phase</label>
+      <default></default>
+    </entry>
+    <entry name="imageNight" type="String">
+      <label>Image assigned to night phase</label>
+      <default></default>
+    </entry>
+    <entry name="latitude" type="Double">
+      <label>User geographic latitude</label>
+      <default>0.0</default>
+    </entry>
+    <entry name="longitude" type="Double">
+      <label>User geographic longitude</label>
+      <default>0.0</default>
+    </entry>
+    <entry name="transitionDuration" type="Int">
+      <label>Cross-fade transition duration in milliseconds</label>
+      <default>1500</default>
+    </entry>
+  </group>
+</kcfg>
