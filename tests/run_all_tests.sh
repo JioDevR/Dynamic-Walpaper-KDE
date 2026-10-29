@@ -12,7 +12,11 @@ echo "=== 2. Testing Astronomical Solar Engine (solar.js) ==="
 node tests/test_solar.js
 
 echo ""
-echo "=== 3. Testing QML Syntax & Components (qmllint) ==="
+echo "=== 3. Testing Geolocation Client (geolocation.js) ==="
+node tests/test_geolocation.js
+
+echo ""
+echo "=== 4. Testing QML Syntax & Components (qmllint) ==="
 bash tests/test_qml_syntax.sh
 
 echo ""
