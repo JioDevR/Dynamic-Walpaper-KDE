@@ -5,6 +5,7 @@ import QtQuick.Dialogs
 import Qt.labs.folderlistmodel
 import org.kde.kirigami as Kirigami
 import "../js/solar.js" as SolarEngine
+import "../js/geolocation.js" as GeoClient
 
 ColumnLayout {
     id: configRoot
@@ -25,6 +26,11 @@ ColumnLayout {
     property real cfg_latitude: 0.0
     property real cfg_longitude: 0.0
     property int cfg_transitionDuration: 1500
+
+    // Geolocation detection state
+    property bool isDetectingLocation: false
+    property string locationStatusText: ""
+    property bool locationStatusIsError: false
 
     // Internal state for solar calculations preview
     property string previewSunrise: "--:--"
@@ -249,6 +255,58 @@ ColumnLayout {
                         configRoot.cfg_longitude = v;
                     }
                 }
+            }
+        }
+
+        RowLayout {
+            Kirigami.FormData.label: "Detección Automática:"
+            spacing: Kirigami.Units.smallSpacing
+
+            QQC2.Button {
+                id: detectLocationBtn
+                text: "Detectar ubicación"
+                icon.name: "mark-location"
+                enabled: !configRoot.isDetectingLocation
+                onClicked: {
+                    configRoot.isDetectingLocation = true;
+                    configRoot.locationStatusText = "Detectando ubicación por IP...";
+                    configRoot.locationStatusIsError = false;
+
+                    GeoClient.fetchLocation(function(result) {
+                        configRoot.cfg_latitude = result.lat;
+                        configRoot.cfg_longitude = result.lon;
+                        latField.text = result.lat.toString();
+                        lonField.text = result.lon.toString();
+                        configRoot.isDetectingLocation = false;
+                        configRoot.locationStatusIsError = false;
+
+                        var place = result.city ? result.city : "";
+                        if (result.country) {
+                            place = place ? place + ", " + result.country : result.country;
+                        }
+                        configRoot.locationStatusText = place ? "📍 " + place : "📍 Ubicación detectada";
+                        configRoot.updateSolarPreview();
+                    }, function(errMsg) {
+                        configRoot.isDetectingLocation = false;
+                        configRoot.locationStatusIsError = true;
+                        configRoot.locationStatusText = "⚠️ " + errMsg;
+                    }, { timeout: 7000 });
+                }
+            }
+
+            QQC2.BusyIndicator {
+                running: configRoot.isDetectingLocation
+                visible: configRoot.isDetectingLocation
+                implicitWidth: Kirigami.Units.gridUnit
+                implicitHeight: Kirigami.Units.gridUnit
+            }
+
+            QQC2.Label {
+                text: configRoot.locationStatusText
+                visible: configRoot.locationStatusText !== ""
+                color: configRoot.locationStatusIsError ? Kirigami.Theme.negativeTextColor : Kirigami.Theme.positiveTextColor
+                font.weight: Font.DemiBold
+                elide: Text.ElideRight
             }
         }
 
