@@ -1,5 +1,22 @@
+# Carpeta pesada de fondos de pantalla (1.1 GB)
+Walpapers/
+walpapers/
+wallpapers/
+
+# Entornos de desarrollo y agentes
 .superpowers/
-.worktrees
 .worktrees/
-worktrees
 worktrees/
+
+# Archivos de sistema operativo y editores
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.vscode/
+.idea/
+
+# Artefactos y temporales de compilación / paquetes
+*.kpr
+*.tar.gz
+*.zip
